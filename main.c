@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/20 13:52:53 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/04/20 14:57:52 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 int		main(void)
 {
-	ft_printf("The number is %d", 12345);
+	ft_printf("%s the number is %d", "Hello world,", 12345);
 	return (0);
 }

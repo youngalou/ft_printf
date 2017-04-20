@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/20 13:51:58 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/04/20 14:57:09 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ int		ft_printf(const char *fmt, ...)
 	char		*place;
 
 	va_start(ap, fmt);
-	if ((place = ft_strchr(fmt, '%')))
+	while ((place = ft_strchr(fmt, '%')))
+	{
 		handle_args(fmt, ap, place);
+		fmt = place + 2;
+	}
 	va_end(ap);
 	return (0);
 }
