@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/27 10:39:14 by lyoung            #+#    #+#              #
-#    Updated: 2017/03/14 13:42:17 by lyoung           ###   ########.fr        #
+#    Updated: 2017/04/21 10:49:54 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = ft_putchar.c \
 	   ft_strnequ.c \
 	   ft_strsub.c \
 	   ft_strjoin.c \
+	   ft_strnjoin.c \
 	   ft_strtrim.c \
 	   ft_strsplit.c \
 	   ft_isalpha.c \

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 13:56:33 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/21 10:57:55 by lyoung           ###   ########.fr       */
+/*   Created: 2017/04/21 10:32:47 by lyoung            #+#    #+#             */
+/*   Updated: 2017/04/21 10:58:21 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strnjoin(const char *s1, const char *s2, size_t n)
 {
 	char	*str;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	if (!s1 || !s2)
 		return (0);
-	str = (char*)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = (char*)malloc(ft_strlen(s1) + n + 1);
 	i = 0;
 	j = 0;
 	if (!str)
@@ -30,7 +30,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		str[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
+	while (j < n)
 	{
 		str[i] = s2[j];
 		i++;
