@@ -6,11 +6,21 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/21 11:15:21 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/04/21 11:51:37 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	add_to_string(const char *fmt, char **str)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(*str, fmt);
+	free(*str);
+	*str = tmp;
+	//free(tmp);
+}
 
 void	string_conv(char **str, va_list ap)
 {
@@ -89,6 +99,8 @@ int		ft_printf(const char *fmt, ...)
 		handle_args(fmt, ap, place, &str);
 		fmt = place + 2;
 	}
+	if (ft_strlen(fmt))
+		add_to_string(fmt, &str);
 	ft_putstr(str);
 	va_end(ap);
 	return (0);
