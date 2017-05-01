@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/21 11:22:42 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/01 14:54:31 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int		main(void)
 {
-	ft_printf("%s the number is %d.\nBlargh!", "Hello world,", 12345);
+	ft_printf("%s this is a test %s funtion which should output %d\n", "Hello world,", "for my ft_printf", 12345);
 	return (0);
 }
