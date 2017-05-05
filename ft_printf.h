@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/04/21 10:51:44 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/05 12:26:34 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,29 @@
 # include "./libft/libft.h"
 # include <stdio.h>
 
+typedef struct	s_args
+{
+	char		length;
+}				t_args;
+
+typedef struct	s_res
+{
+	char		*out;
+	size_t		len;
+	size_t		cap;
+}				t_res;
+
 int		ft_printf(const char *format, ...);
+void    handle_args(const char *fmt, va_list ap, char *spec, t_res *res);
+
+void    string_conv(t_res *res, va_list ap);
+void	decimal_conv(t_res *res, va_list ap);
+void    char_conv(t_res *res, va_list ap);
+
+void	search_mods(char *place);
+
+t_res	*init_res(size_t cap);
+int		resize_res(t_res *res, size_t size);
+void	check_res(t_res *res, size_t size);
 
 #endif

@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_mods.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 14:04:38 by lyoung           ###   ########.fr       */
+/*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
+/*   Updated: 2017/05/04 12:21:14 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		main(void)
+void	search_mods(char *place)
 {
-	ft_printf("%s this is a test %s function which should output %d\n", "Hello world,", "for my ft_printf", -12345);
-	return (0);
+	t_args	arg;
+
+    if (*place == 'l')
+    {
+        if (*(place + 1) == 'l')
+            arg->length = 'L';
+        arg->length = 'l';
+    }
+	else if (*place == 'h')
+	{
+		if (*(place + 1) == 'h')
+			arg->length = 'H';
+		arg->length = 'h';
+	}
+	else if (*place == 'j')
+		arg->length = 'j';
+	else if (*place == 'z')
+		arg->length = 'z';
 }

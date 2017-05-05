@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 14:04:38 by lyoung           ###   ########.fr       */
+/*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
+/*   Updated: 2017/05/05 12:28:42 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		main(void)
+void    string_conv(t_res *res, va_list ap)
 {
-	ft_printf("%s this is a test %s function which should output %d\n", "Hello world,", "for my ft_printf", -12345);
-	return (0);
+    char    *s;
+
+    s = va_arg(ap, char*);
+	ft_strcat(res->out, s);
+}
+
+void    decimal_conv(t_res *res, va_list ap)
+{
+    char    *s;
+
+    s = ft_itoa(va_arg(ap, int));
+	ft_strcat(res->out, s);
+}
+
+void    char_conv(t_res *res, va_list ap)
+{
+    char    s[2];
+
+    s[0] = va_arg(ap, int);
+    s[1] = '\0';
+	ft_strcat(res->out, s);
 }
