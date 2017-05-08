@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 12:28:42 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:30:38 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,29 @@ void    char_conv(t_res *res, va_list ap)
 
     s[0] = va_arg(ap, int);
     s[1] = '\0';
+	ft_strcat(res->out, s);
+}
+
+void	unsigned_int_conv(t_res *res, va_list ap)
+{
+	char	*s;
+
+	s = ft_itoa(va_arg(ap, unsigned int));
+	ft_strcat(res->out, s);
+}
+
+void	unsigned_hex_conv(t_res *res, va_list ap)
+{
+	char	*s;
+
+	s = ft_itoa_base(va_arg(ap, unsigned int), 16);
+	ft_strcat(res->out, s);
+}
+
+void	unsigned_oct_conv(t_res *res, va_list ap)
+{
+	char	*s;
+
+	s = ft_itoa_base(va_arg(ap, unsigned int), 8);
 	ft_strcat(res->out, s);
 }

@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 14:09:04 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:32:32 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ void	handle_args(const char *fmt, va_list ap, char *spec, t_res *res)
 	else if (*conv == 'c')
 	{
 		char_conv(res, ap);
+		return ;
+	}
+	else if (*conv == 'u')
+	{
+		unsigned_int_conv(res, ap);
+		return ;
+	}
+	else if (*conv == 'x')
+	{
+		unsigned_hex_conv(res, ap);
+		return ;
+	}
+	else if (*conv == 'o')
+	{
+		unsigned_oct_conv(res, ap);
 		return ;
 	}
 }

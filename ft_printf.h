@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 12:26:34 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:31:16 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <limits.h>
 # include "./libft/libft.h"
 # include <stdio.h>
 
 typedef struct	s_args
 {
-	char		length;
+	int			length;
 }				t_args;
 
 typedef struct	s_res
@@ -36,6 +37,9 @@ void    handle_args(const char *fmt, va_list ap, char *spec, t_res *res);
 void    string_conv(t_res *res, va_list ap);
 void	decimal_conv(t_res *res, va_list ap);
 void    char_conv(t_res *res, va_list ap);
+void	unsigned_int_conv(t_res *res, va_list ap);
+void	unsigned_hex_conv(t_res *res, va_list ap);
+void	unsigned_oct_conv(t_res *res, va_list ap);
 
 void	search_mods(char *place);
 

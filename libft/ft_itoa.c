@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 10:29:35 by lyoung            #+#    #+#             */
-/*   Updated: 2017/03/15 11:20:11 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 12:01:40 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static size_t	count_digits(long n)
 	return (count);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long n)
 {
-	int		neg;
-	long	nb;
-	int		len;
-	char	*str;
+	int			neg;
+	long long	nb;
+	int			len;
+	char		*str;
 
 	neg = (n >= 0) ? 0 : 1;
 	nb = n;
