@@ -6,11 +6,45 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 12:30:38 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 13:16:03 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	handle_conv(char *conv, va_list ap, t_res *res)
+{
+    if (*conv == 's')
+    {
+        string_conv(res, ap);
+        return ;
+    }
+    else if (*conv == 'd' || *conv == 'i')
+    {
+        decimal_conv(res, ap);
+        return ;
+    }
+    else if (*conv == 'c')
+    {
+        char_conv(res, ap);
+        return ;
+    }
+    else if (*conv == 'u')
+    {
+        unsigned_int_conv(res, ap);
+        return ;
+    }
+    else if (*conv == 'x')
+    {
+        unsigned_hex_conv(res, ap);
+        return ;
+    }
+    else if (*conv == 'o')
+    {
+        unsigned_oct_conv(res, ap);
+        return ;
+    }
+}
 
 void    string_conv(t_res *res, va_list ap)
 {

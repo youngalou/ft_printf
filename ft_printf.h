@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 12:31:16 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 13:15:51 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 # include <limits.h>
 # include "./libft/libft.h"
 # include <stdio.h>
+
+/*
+** h  = 1
+** hh = 1
+** l  = 3
+** ll = 4
+** z  = 5
+** j  = 6
+*/
+
 
 typedef struct	s_args
 {
@@ -33,6 +43,7 @@ typedef struct	s_res
 
 int		ft_printf(const char *format, ...);
 void    handle_args(const char *fmt, va_list ap, char *spec, t_res *res);
+void    handle_conv(char *conv, va_list ap, t_res *res);
 
 void    string_conv(t_res *res, va_list ap);
 void	decimal_conv(t_res *res, va_list ap);
