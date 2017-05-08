@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 13:15:51 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 13:55:19 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct	s_res
 }				t_res;
 
 int		ft_printf(const char *format, ...);
-void    handle_args(const char *fmt, va_list ap, char *spec, t_res *res);
+char	*handle_args(const char *fmt, va_list ap, char *spec, t_res *res);
 void    handle_conv(char *conv, va_list ap, t_res *res);
 
 void    string_conv(t_res *res, va_list ap);
@@ -52,7 +52,7 @@ void	unsigned_int_conv(t_res *res, va_list ap);
 void	unsigned_hex_conv(t_res *res, va_list ap);
 void	unsigned_oct_conv(t_res *res, va_list ap);
 
-void	search_mods(char *place);
+char	*search_mods(char *place, t_args *mod);
 
 t_res	*init_res(size_t cap);
 int		resize_res(t_res *res, size_t size);
