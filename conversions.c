@@ -6,42 +6,42 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 13:16:03 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 15:15:53 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_conv(char *conv, va_list ap, t_res *res)
+void	handle_conv(char *spec, t_res *res, va_list ap)
 {
-    if (*conv == 's')
+    if (*spec == 's')
     {
         string_conv(res, ap);
         return ;
     }
-    else if (*conv == 'd' || *conv == 'i')
+    else if (*spec == 'd' || *spec == 'i')
     {
         decimal_conv(res, ap);
         return ;
     }
-    else if (*conv == 'c')
+    else if (*spec == 'c')
     {
         char_conv(res, ap);
         return ;
     }
-    else if (*conv == 'u')
+    else if (*spec == 'u')
     {
         unsigned_int_conv(res, ap);
         return ;
     }
-    else if (*conv == 'x')
-    {
-        unsigned_hex_conv(res, ap);
-        return ;
-    }
-    else if (*conv == 'o')
+    else if (*spec == 'o')
     {
         unsigned_oct_conv(res, ap);
+        return ;
+    }
+    else if (*spec == 'x' || *spec == 'X')
+    {
+        unsigned_hex_conv(res, ap, *spec);
         return ;
     }
 }
@@ -79,18 +79,28 @@ void	unsigned_int_conv(t_res *res, va_list ap)
 	ft_strcat(res->out, s);
 }
 
-void	unsigned_hex_conv(t_res *res, va_list ap)
-{
-	char	*s;
-
-	s = ft_itoa_base(va_arg(ap, unsigned int), 16);
-	ft_strcat(res->out, s);
-}
-
 void	unsigned_oct_conv(t_res *res, va_list ap)
 {
 	char	*s;
 
 	s = ft_itoa_base(va_arg(ap, unsigned int), 8);
+	ft_strcat(res->out, s);
+}
+
+void	unsigned_hex_conv(t_res *res, va_list ap, char conv)
+{
+	char	*s;
+	int		i;
+
+	s = ft_itoa_base(va_arg(ap, unsigned int), 16);
+	if (conv == 'x')
+	{
+		i = 0;
+		while (s[i])
+		{
+			s[i] = ft_tolower(s[i]);
+			i++;
+		}
+	}
 	ft_strcat(res->out, s);
 }
