@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 15:13:37 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/08 16:05:57 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 ** j  = 6
 */
 
-
 typedef struct	s_args
 {
 	int			length;
@@ -41,21 +40,22 @@ typedef struct	s_res
 	size_t		cap;
 }				t_res;
 
-int		ft_printf(const char *format, ...);
-char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap);
+int				ft_printf(const char *format, ...);
+char			*handle_args(const char *fmt, char *place, t_res *res,
+							va_list ap);
 
-void    handle_conv(char *spec, t_res *res, va_list ap);
-void    string_conv(t_res *res, va_list ap);
-void	decimal_conv(t_res *res, va_list ap);
-void    char_conv(t_res *res, va_list ap);
-void	unsigned_int_conv(t_res *res, va_list ap);
-void	unsigned_oct_conv(t_res *res, va_list ap);
-void	unsigned_hex_conv(t_res *res, va_list ap, char conv);
+void			handle_conv(char *spec, t_res *res, va_list ap);
+void			string_conv(t_res *res, va_list ap);
+void			decimal_conv(t_res *res, va_list ap);
+void			char_conv(t_res *res, va_list ap);
+void			unsigned_int_conv(t_res *res, va_list ap);
+void			unsigned_oct_conv(t_res *res, va_list ap);
+void			unsigned_hex_conv(t_res *res, va_list ap, char conv);
 
-char	*search_mods(char *place, t_args *mod);
+char			*search_mods(char *place, t_args *mod);
 
-t_res	*init_res(size_t cap);
-int		resize_res(t_res *res, size_t size);
-void	check_res(t_res *res, size_t size);
+t_res			*init_res(size_t cap);
+int				resize_res(t_res *res, size_t size);
+void			check_res(t_res *res, size_t size);
 
 #endif
