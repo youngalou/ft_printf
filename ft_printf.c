@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 11:20:27 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/11 15:10:54 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap)
 		spec = search_mods(spec, mod);
 	if (F_CONV)
 		handle_conv(spec, res, ap, mod);
-//	ft_putnbr(mod->length);
-//	ft_putchar('\n');
 	return (spec + 1);
 }
 

@@ -6,53 +6,53 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 14:12:06 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/11 15:09:34 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*search_mods(char *place, t_args *mod)
+char	*search_mods(char *spec, t_args *mod)
 {
 	int		length;
 
 	length = 0;
-	while (*place == 'h' || *place == 'l' || *place == 'z' || *place == 'j')
+	while (F_MOD)
 	{
-		if (*place == 'h')
+		if (*spec == 'h')
 		{
-			if (*(place + 1) == 'h')
+			if (*(spec + 1) == 'h')
 			{
 				(length < 1) ? length = 1 : 0;
-				place++;
+				spec++;
 			}
 			else
 				(length < 2) ? length = 2 : 0;
-			place++;
+			spec++;
 		}
-		else if (*place == 'l')
+		else if (*spec == 'l')
 		{
-			if (*(place + 1) == 'l')
+			if (*(spec + 1) == 'l')
 			{
 				(length < 3) ? length = 3 : 0;
-				place++;
+				spec++;
 			}
 			(length < 4) ? length = 4 : 0;
-			place++;
+			spec++;
 		}
-		else if (*place == 'z')
+		else if (*spec == 'z')
 		{
 			(length < 5) ? length = 5 : 0;
-			place++;
+			spec++;
 		}
-		else if (*place == 'j')
+		else if (*spec == 'j')
 		{
 			(length < 6) ? length = 6 : 0;
-			place++;
+			spec++;
 		}
 	}
 	mod->length = length;
-	return (place);
+	return (spec);
 }
 
 intmax_t	uox_len(va_list ap, t_args *mod)

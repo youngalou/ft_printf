@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 14:48:53 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/11 15:09:14 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			unsigned_oct_conv(t_res *res, va_list ap, t_args *mod);
 void			unsigned_hex_conv(t_res *res, va_list ap, char conv, t_args *mod);
 void			pointer_conv(t_res *res, va_list ap);
 
-char			*search_mods(char *place, t_args *mod);
+char			*search_mods(char *spec, t_args *mod);
 intmax_t		uox_len(va_list ap, t_args *mod);
 intmax_t		di_len(va_list ap, t_args *mod);
 
