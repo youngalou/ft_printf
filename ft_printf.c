@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 15:09:00 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/11 11:20:27 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap)
 			res->len = ft_strlen(res->out);
 		}
 	}
-	if (*spec == 'h' || *spec == 'l' || *spec == 'z' || *spec == 'j')
+	if (F_MOD)
 		spec = search_mods(spec, mod);
-	if (*spec == 's' || *spec == 'd' || *spec == 'i' || *spec == 'c'
-			|| *spec == 'u' || *spec == 'o' || *spec == 'x' || *spec == 'X')
-		handle_conv(spec, res, ap);
+	if (F_CONV)
+		handle_conv(spec, res, ap, mod);
+//	ft_putnbr(mod->length);
+//	ft_putchar('\n');
 	return (spec + 1);
 }
 

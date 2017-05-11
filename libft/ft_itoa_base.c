@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/08 16:25:51 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/10 13:54:52 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*build_str(long long nb, int base, int digit, int neg_flag)
 	while (nb > 0)
 	{
 		if (nb % base > 9)
-			ret[digit] = nb % base + 55;
+			ret[digit] = nb % base + 87;
 		else
 			ret[digit] = nb % base + '0';
 		nb = nb / base;
