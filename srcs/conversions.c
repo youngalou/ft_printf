@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 14:05:53 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 14:16:30 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	char	*s;
 
 	s = handle_conv(res, ap, mod, spec);
-	s = add_prefix(s, mod);
 	res->size = ((*s == '\0' && (*spec == 'c' || *spec == 'C')) ? 1 : ft_strlen(s));
 	s = add_padding(s, mod->width - res->size, mod);
 	res->len += ft_strlen(s);
@@ -43,11 +42,11 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 		s = handle_prec(s, mod);
 	}
 	else if (*spec == 'd' || *spec == 'D' || *spec == 'i')
-		s = ft_itoa(di_len(ap, mod));
+		s = add_prefix(ft_itoa(di_len(ap, mod)), mod);
 	else if (*spec == 'c' || *spec == 'C')
 		s = char_conv(res, ap);
 	else if (F_UOX)
-		s = uox_conv(ap, mod, spec, s);
+		s = add_prefix(uox_conv(ap, mod, spec, s), mod);
 	else if (*spec == 'p')
 		s = pointer_conv(res, ap);
 	return (s);

@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 14:08:35 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 14:40:33 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 	}
 	else if (*spec == '-')
 		mod->align = 1;
-	else if (*spec == '0')
+	else if (*spec == '0' && mod->align == 0)
 		mod->pad = '0';
 	else if (*spec == '.')
 	{
@@ -60,7 +60,7 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 				spec++;
 		}
 	}
-	else if (*spec == ' ' || *spec == '+')
+	else if ((*spec == ' ' || *spec == '+') && mod->pre != '+')
 		mod->pre = *spec;
 	else if (*spec >= '1' && *spec <= '9')
 	{
