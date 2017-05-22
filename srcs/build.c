@@ -6,11 +6,11 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:49:53 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/05 14:08:29 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 13:43:32 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libftprintf.h"
 
 t_res	*init_res(size_t cap)
 {
@@ -20,6 +20,7 @@ t_res	*init_res(size_t cap)
 	res->out = ft_strnew(cap);
 	res->cap = cap;
 	res->len = 0;
+	res->size = 0;
 	return (res);
 }
 

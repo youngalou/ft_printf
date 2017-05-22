@@ -6,14 +6,15 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 14:52:14 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 13:32:41 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 int		main(void)
 {
-	ft_printf("%hX\n", UINT_MAX);
+	ft_printf("[ft_printf = %2c]\n", 0);
+	printf("[printf    = %2c]\n", 0);
 	return (0);
 }

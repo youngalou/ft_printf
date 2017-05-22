@@ -1,57 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   modifiers.c                                        :+:      :+:    :+:   */
+/*   handle_length.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 15:09:34 by lyoung           ###   ########.fr       */
+/*   Created: 2017/05/19 10:53:12 by lyoung            #+#    #+#             */
+/*   Updated: 2017/05/22 12:21:31 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libftprintf.h"
 
-char	*search_mods(char *spec, t_args *mod)
+char		*handle_length(t_args *mod, char *spec)
 {
-	int		length;
-
-	length = 0;
-	while (F_MOD)
+	if (*spec == 'h')
 	{
-		if (*spec == 'h')
+		if (*(spec + 1) == 'h')
 		{
-			if (*(spec + 1) == 'h')
-			{
-				(length < 1) ? length = 1 : 0;
-				spec++;
-			}
-			else
-				(length < 2) ? length = 2 : 0;
+			(mod->length < 1) ? mod->length = 1 : 0;
 			spec++;
 		}
-		else if (*spec == 'l')
-		{
-			if (*(spec + 1) == 'l')
-			{
-				(length < 3) ? length = 3 : 0;
-				spec++;
-			}
-			(length < 4) ? length = 4 : 0;
-			spec++;
-		}
-		else if (*spec == 'z')
-		{
-			(length < 5) ? length = 5 : 0;
-			spec++;
-		}
-		else if (*spec == 'j')
-		{
-			(length < 6) ? length = 6 : 0;
-			spec++;
-		}
+		else
+			(mod->length < 2) ? mod->length = 2 : 0;
 	}
-	mod->length = length;
+	else if (*spec == 'l')
+	{
+		if (*(spec + 1) == 'l')
+		{
+			(mod->length < 4) ? mod->length = 4 : 0;
+			spec++;
+		}
+		(mod->length < 3) ? mod->length = 3 : 0;
+	}
+	else if (*spec == 'z')
+		(mod->length < 5) ? mod->length = 5 : 0;
+	else if (*spec == 'j')
+		(mod->length < 6) ? mod->length = 6 : 0;
+	spec++;
 	return (spec);
 }
 
@@ -64,13 +50,13 @@ intmax_t	uox_len(va_list ap, t_args *mod)
 	else if (mod->length == 2)
 		return ((unsigned short)va_arg(ap, unsigned int));
 	else if (mod->length == 3)
-		return ((long)va_arg(ap, unsigned int));
+		return ((long)va_arg(ap, unsigned long));
 	else if (mod->length == 4)
-		return ((long long)va_arg(ap, unsigned int));
+		return ((long long)va_arg(ap, unsigned int)); //should be unsigned long long, but can't make datatype any >
 	else if (mod->length == 5)
-		return ((size_t)va_arg(ap, unsigned int));
+		return ((size_t)va_arg(ap, size_t));
 	else if (mod->length == 6)
-		return ((intmax_t)va_arg(ap, unsigned int));
+		return ((intmax_t)va_arg(ap, uintmax_t));
 	return (0);
 }
 
@@ -83,12 +69,12 @@ intmax_t	di_len(va_list ap, t_args *mod)
 	else if (mod->length == 2)
 		return ((short)va_arg(ap, unsigned int));
 	else if (mod->length == 3)
-		return ((long)va_arg(ap, unsigned int));
+		return ((long)va_arg(ap, long));
 	else if (mod->length == 4)
-		return ((long long)va_arg(ap, unsigned int));
+		return ((long long)va_arg(ap, long long));
 	else if (mod->length == 5)
-		return ((size_t)va_arg(ap, unsigned int));
+		return ((size_t)va_arg(ap, size_t));
 	else if (mod->length == 6)
-		return ((intmax_t)va_arg(ap, unsigned int));
+		return ((intmax_t)va_arg(ap, intmax_t));
 	return (0);
 }

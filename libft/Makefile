@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/27 10:39:14 by lyoung            #+#    #+#              #
-#    Updated: 2017/05/08 12:27:41 by lyoung           ###   ########.fr        #
+#    Updated: 2017/05/22 12:04:19 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRCS = ft_putchar.c \
 	   ft_tolower.c \
 	   ft_itoa.c \
 	   ft_itoa_base.c \
+	   ft_uinttoa_base.c \
 	   ft_lstnew.c \
 	   ft_lstdelone.c \
 	   ft_lstdel.c \
@@ -81,13 +82,13 @@ all: $(NAME)
 
 $(NAME): $(SRCS)
 	@gcc $(CFLAG) -c $(SRCS)
-	@echo "\033[32m- object files created\033[0m"
+	@echo "\033[32m- libft object files created\033[0m"
 	@ar rc $(NAME) $(OBJS)
 	@echo "\033[32m- libft.a compiled\033[0m"
 
 clean:
 	@rm -f $(OBJS)
-	@echo "\033[31m- object files removed\033[0m"
+	@echo "\033[31m- libft object files removed\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)

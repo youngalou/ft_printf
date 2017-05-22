@@ -6,14 +6,15 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/11 14:16:45 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 14:42:51 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/19 14:08:22 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
 
 int		main(void)
 {
-	printf("%%\n", UINT_MAX);
+	char	*s = "abc";
+	printf("%%");
 	return (0);
 }

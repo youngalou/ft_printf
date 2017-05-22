@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 15:09:14 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 14:06:33 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
 # include "./libft/libft.h"
 # include <stdio.h>
+
 # define F_CONV (*spec == 's' || *spec == 'S' || *spec == 'd' || *spec == 'D' || *spec == 'i' || *spec == 'c' || *spec == 'C' || *spec == 'u' || *spec == 'U' || *spec == 'o' || *spec == 'O' || *spec == 'x' || *spec == 'X' || *spec == 'p' || *spec == '%')
+
+# define F_UOX (*spec == 'u' || *spec == 'U' || *spec == 'o' || *spec == 'O' || *spec == 'x' || *spec == 'X')
+
 # define F_CAPS (*spec == 'S' || *spec == 'D' || *spec == 'C' || *spec == 'U' || *spec == 'O')
-# define F_MOD (*spec == 'h' || *spec == 'l' || *spec == 'z' || *spec == 'j')
+
+# define F_MOD (*spec == 'h' || *spec == 'l' || *spec == 'L' || *spec == 'z' || *spec == 'j' || *spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == '0' || *spec == ' ' || *spec == '#' || (*spec >= '1' && *spec <= '9'))
+
+# define F_LEN (*spec == 'h' || *spec == 'l' || *spec == 'L' || *spec == 'z' || *spec == 'j')
+
+# define F_FLAGS (*spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == '0' || *spec == ' ' || *spec == '#' || (*spec >= '1' && *spec <= '9'))
 
 /*
-** hh  = 1	:	unsigned char
-** h = 2	:	unsigned short
+** hh = 1	:	unsigned char
+** h  = 2	:	unsigned short
 ** l  = 3	:	long
 ** ll = 4	:	long long
 ** z  = 5	:	size_t
@@ -44,6 +53,12 @@ typedef enum
 typedef struct	s_args
 {
 	length		length;
+	size_t		width;
+	int			prec;
+	int			align;
+	char		pad;
+	char		pre;
+	int			base;
 }				t_args;
 
 typedef struct	s_res
@@ -51,25 +66,49 @@ typedef struct	s_res
 	char		*out;
 	size_t		len;
 	size_t		cap;
+	size_t		size;
 }				t_res;
+
+/*
+** --------------- ft_printf.c --------------
+*/
 
 int				ft_printf(const char *format, ...);
 char			*handle_args(const char *fmt, char *place, t_res *res,
 							va_list ap);
 
-void			handle_conv(char *spec, t_res *res, va_list ap, t_args *mod);
-void    		percent_conv(t_res *res, va_list ap);
-void			string_conv(t_res *res, va_list ap, t_args *mod);
-void			decimal_conv(t_res *res, va_list ap, t_args *mod);
-void			char_conv(t_res *res, va_list ap, t_args *mod);
-void			unsigned_int_conv(t_res *res, va_list ap, t_args *mod);
-void			unsigned_oct_conv(t_res *res, va_list ap, t_args *mod);
-void			unsigned_hex_conv(t_res *res, va_list ap, char conv, t_args *mod);
-void			pointer_conv(t_res *res, va_list ap);
+/*
+** --------------- conversions.c --------------
+*/
 
-char			*search_mods(char *spec, t_args *mod);
+void			conversions(t_res *res, va_list ap, t_args *mod, char *spec);
+char			*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec);
+char			*uox_conv(va_list ap, t_args *mod, char *spec, char *s);
+char			*char_conv(t_res *res, va_list ap);
+char			*pointer_conv(t_res *res, va_list ap);
+
+/*
+** --------------- modifiers.c --------------
+*/
+
+void			init_mods(t_args *mod);
+char			*search_mods(va_list ap, t_args *mod, char *spec);
+char			*handle_flags(va_list ap, t_args *mod, char *spec);
+char			*add_padding(char *s, int len, t_args *mod);
+char			*handle_prec(char *s, t_args *mod);
+char			*add_prefix(char *s, t_args *mod);
+
+/*
+** --------------- handle_length.c --------------
+*/
+
+char			*handle_length(t_args *mod, char *spec);
 intmax_t		uox_len(va_list ap, t_args *mod);
 intmax_t		di_len(va_list ap, t_args *mod);
+
+/*
+** --------------- build.c --------------
+*/
 
 t_res			*init_res(size_t cap);
 int				resize_res(t_res *res, size_t size);

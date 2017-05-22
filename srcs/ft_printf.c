@@ -6,11 +6,11 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/11 15:10:54 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 13:26:43 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libftprintf.h"
 
 char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap)
 {
@@ -19,24 +19,17 @@ char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap)
 
 	spec = place + 1;
 	mod = (t_args*)malloc(sizeof(t_args));
+	init_mods(mod);
 	if (place - fmt)
 	{
-		if (!res->out)
-		{
-			ft_strncpy(res->out, fmt, place - fmt);
-			res->len = place - fmt;
-		}
-		else
-		{
-			check_res(res, place - fmt);
-			ft_strncat(res->out, fmt, place - fmt);
-			res->len = ft_strlen(res->out);
-		}
+		check_res(res, place - fmt);
+		ft_strncat(res->out, fmt, place - fmt);
+		res->len += place - fmt;
 	}
 	if (F_MOD)
-		spec = search_mods(spec, mod);
+		spec = search_mods(ap, mod, spec);
 	if (F_CONV)
-		handle_conv(spec, res, ap, mod);
+		conversions(res, ap, mod, spec);
 	return (spec + 1);
 }
 
@@ -51,8 +44,11 @@ int		ft_printf(const char *fmt, ...)
 	while ((place = ft_strchr(fmt, '%')))
 		fmt = handle_args(fmt, place, res, ap);
 	if (ft_strlen(fmt))
+	{
 		ft_strcat(res->out, fmt);
-	ft_putstr(res->out);
+		res->len += ft_strlen(fmt);
+	}
 	va_end(ap);
-	return (ft_strlen(res->out));
+	ft_putstr(res->out);
+	return (res->len);
 }

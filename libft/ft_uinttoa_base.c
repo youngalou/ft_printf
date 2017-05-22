@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_uinttoa_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 12:14:48 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 12:16:46 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*build_str(intmax_t nb, int base, int digit, int neg_flag)
+char	*ft_uinttoa_base(uintmax_t value, int base)
 {
+	uintmax_t	nb;
+	uintmax_t	base_var;
+	int			digit;
 	char		*ret;
-	intmax_t	base_var;
 
+	nb = value;
 	base_var = 1;
+	digit = 0;
+	if (nb == 0)
+		return("0\0");
 	while (nb >= base_var)
 	{
 		base_var = base * base_var;
@@ -26,38 +32,14 @@ char	*build_str(intmax_t nb, int base, int digit, int neg_flag)
 	ret = (char*)malloc(sizeof(ret) * (digit + 1));
 	ret[digit] = '\0';
 	digit--;
-	(neg_flag) ? ret[0] = '-' : 0;
 	while (nb > 0)
 	{
 		if (nb % base > 9)
-			ret[digit] = nb % base + 87;
+			ret[digit] = (nb % base) + 55;
 		else
-			ret[digit] = nb % base + '0';
-		nb = nb / base;
+			ret[digit] = (nb % base) + '0';
 		digit--;
+		nb = nb / base;
 	}
 	return (ret);
-}
-
-char	*ft_itoa_base(intmax_t value, int base)
-{
-	intmax_t	nb;
-	int			digit;
-	int			neg_flag;
-
-	nb = value;
-	digit = 0;
-	neg_flag = 0;
-	if (nb == 0)
-		return ("0\0");
-	if (nb < 0)
-	{
-		nb = -nb;
-		if (base == 10)
-		{
-			digit++;
-			neg_flag = 1;
-		}
-	}
-	return (build_str(nb, base, digit, neg_flag));
 }
