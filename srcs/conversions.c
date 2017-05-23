@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 14:16:30 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 16:57:44 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,20 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 		s = va_arg(ap, char*);
 		if (!s)
 			s = "(null)";
-		s = handle_prec(s, mod);
+		s = string_prec(s, mod);
 	}
 	else if (*spec == 'd' || *spec == 'D' || *spec == 'i')
-		s = add_prefix(ft_itoa(di_len(ap, mod)), mod);
+	{
+		s = ft_itoa(di_len(ap, mod));
+		s = add_prefix((diuox_prec(s, mod->prec - ft_strlen(s))), mod);
+	}
 	else if (*spec == 'c' || *spec == 'C')
 		s = char_conv(res, ap);
 	else if (F_UOX)
-		s = add_prefix(uox_conv(ap, mod, spec, s), mod);
+	{
+		s = uox_conv(ap, mod, spec, s);
+		s = add_prefix((diuox_prec(s, mod->prec - ft_strlen(s))), mod);
+	}
 	else if (*spec == 'p')
 		s = pointer_conv(res, ap);
 	return (s);

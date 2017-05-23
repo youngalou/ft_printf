@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 14:40:33 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/22 17:01:40 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 			while (*(spec + 1) >= '0' && *(spec + 1) <= '9')
 				spec++;
 		}
+		mod->pad = ' ';
 	}
 	else if ((*spec == ' ' || *spec == '+') && mod->pre != '+')
 		mod->pre = *spec;
@@ -71,7 +72,7 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 	return (spec + 1);
 }
 
-char		*handle_prec(char *s, t_args *mod)
+char		*string_prec(char *s, t_args *mod)
 {
 	char	*tmp;
 
@@ -82,13 +83,40 @@ char		*handle_prec(char *s, t_args *mod)
 	return (tmp);
 }
 
-char		*add_padding(char *s, int len, t_args *mod)
+char		*diuox_prec(char *s, int len)
 {
 	char	*padding;
 	char	*tmp;
 
 	if (len < 1)
 		return (s);
+	padding = (char*)malloc(len + 1);
+	padding[len] = '\0';
+	len--;
+	while (len >= 0)
+	{
+		padding[len] = '0';
+		len--;
+	}
+	tmp = NULL;
+	tmp = ft_strjoin(padding, s);
+	//ft_strdel(&s);
+	s = tmp;
+	//ft_strdel(&padding);
+	return (s);
+}
+
+char		*add_padding(char *s, int len, t_args *mod)
+{
+	char	*padding;
+	char	*tmp;
+//	char	pre[2];
+
+	if (len < 1)
+		return (s);
+//	pre[0] = mod->pre;
+//	pre[1] = '\0';
+//	(mod->pre) ? s++ : 0;
 	padding = (char*)malloc(len + 1);
 	padding[len] = '\0';
 	len--;
@@ -104,6 +132,9 @@ char		*add_padding(char *s, int len, t_args *mod)
 		tmp = ft_strjoin(s, padding);
 	//ft_strdel(&s);
 	s = tmp;
+//	if (pre[0] && mod->pad != ' ')
+//		tmp = ft_strjoin(pre, s);
+//	s = tmp;
 	//ft_strdel(&padding);
 	return (s);
 }
@@ -112,9 +143,15 @@ char		*add_prefix(char *s, t_args *mod)
 {
 	char	pre[2];
 	char	*tmp;
+	int		i;
 
-	if (!mod->pre || *s == '-')
-		return (s);
+	i = 0;
+	while (s[i])
+	{
+		if (!mod->pre || s[i] == '-')
+			return (s);
+		i++;
+	}
 	pre[0] = mod->pre;
 	pre[1] = '\0';
 	tmp = ft_strjoin(pre, s);
