@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 14:06:33 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/23 14:23:03 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_args
 	char		pad;
 	char		pre;
 	int			base;
+	int			hash;
 }				t_args;
 
 typedef struct	s_res
@@ -95,8 +96,9 @@ void			init_mods(t_args *mod);
 char			*search_mods(va_list ap, t_args *mod, char *spec);
 char			*handle_flags(va_list ap, t_args *mod, char *spec);
 char			*add_padding(char *s, int len, t_args *mod);
-char			*handle_prec(char *s, t_args *mod);
+char			*string_prec(char *s, t_args *mod);
 char			*add_prefix(char *s, t_args *mod);
+char			*diuox_prec(char *s, int len, t_args *mod);
 
 /*
 ** --------------- handle_length.c --------------

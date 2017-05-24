@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 17:01:40 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/24 11:09:38 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		init_mods(t_args *mod)
 	mod->pad = ' ';
 	mod->pre = 0;
 	mod->base = 10;
+	mod->hash = 0;
 }
 
 char		*search_mods(va_list ap, t_args *mod, char *spec)
@@ -63,6 +64,8 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 	}
 	else if ((*spec == ' ' || *spec == '+') && mod->pre != '+')
 		mod->pre = *spec;
+	else if (*spec =='#')
+		mod->hash = 1;
 	else if (*spec >= '1' && *spec <= '9')
 	{
 		mod->width = ft_atoi(spec);
@@ -83,13 +86,19 @@ char		*string_prec(char *s, t_args *mod)
 	return (tmp);
 }
 
-char		*diuox_prec(char *s, int len)
+char		*diuox_prec(char *s, int len, t_args *mod)
 {
 	char	*padding;
 	char	*tmp;
+	char	pre[2];
 
+	if (*s == '0')
+		string_prec(s, mod);
 	if (len < 1)
 		return (s);
+	pre[0] = mod->pre;
+	pre[1] = '\0';
+	(mod->pre == '-') ? s++ : 0;
 	padding = (char*)malloc(len + 1);
 	padding[len] = '\0';
 	len--;
@@ -102,6 +111,9 @@ char		*diuox_prec(char *s, int len)
 	tmp = ft_strjoin(padding, s);
 	//ft_strdel(&s);
 	s = tmp;
+	if (pre[0] == '-')
+		tmp = ft_strjoin(pre, s);
+	s = tmp;
 	//ft_strdel(&padding);
 	return (s);
 }
@@ -110,13 +122,13 @@ char		*add_padding(char *s, int len, t_args *mod)
 {
 	char	*padding;
 	char	*tmp;
-//	char	pre[2];
+	char	pre[2];
 
 	if (len < 1)
 		return (s);
-//	pre[0] = mod->pre;
-//	pre[1] = '\0';
-//	(mod->pre) ? s++ : 0;
+	pre[0] = mod->pre;
+	pre[1] = '\0';
+	(mod->pre && mod->pad == '0') ? s++ : 0;
 	padding = (char*)malloc(len + 1);
 	padding[len] = '\0';
 	len--;
@@ -132,9 +144,9 @@ char		*add_padding(char *s, int len, t_args *mod)
 		tmp = ft_strjoin(s, padding);
 	//ft_strdel(&s);
 	s = tmp;
-//	if (pre[0] && mod->pad != ' ')
-//		tmp = ft_strjoin(pre, s);
-//	s = tmp;
+	if (pre[0] && mod->pad == '0')
+		tmp = ft_strjoin(pre, s);
+	s = tmp;
 	//ft_strdel(&padding);
 	return (s);
 }
