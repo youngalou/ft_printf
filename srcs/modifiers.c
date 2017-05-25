@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/24 11:09:38 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 10:55:21 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 	else if ((*spec == ' ' || *spec == '+') && mod->pre != '+')
 		mod->pre = *spec;
 	else if (*spec =='#')
-		mod->hash = 1;
+		mod->hash = 4;
 	else if (*spec >= '1' && *spec <= '9')
 	{
 		mod->width = ft_atoi(spec);
@@ -122,13 +122,13 @@ char		*add_padding(char *s, int len, t_args *mod)
 {
 	char	*padding;
 	char	*tmp;
-	char	pre[2];
+	char	*pre;
 
 	if (len < 1)
 		return (s);
-	pre[0] = mod->pre;
-	pre[1] = '\0';
+	pre = move_prefix(mod);
 	(mod->pre && mod->pad == '0') ? s++ : 0;
+	(mod->hash > 1 && mod->pad == '0') ? s++ : 0;
 	padding = (char*)malloc(len + 1);
 	padding[len] = '\0';
 	len--;
@@ -144,19 +144,45 @@ char		*add_padding(char *s, int len, t_args *mod)
 		tmp = ft_strjoin(s, padding);
 	//ft_strdel(&s);
 	s = tmp;
-	if (pre[0] && mod->pad == '0')
+	if (pre && mod->pad == '0')
 		tmp = ft_strjoin(pre, s);
 	s = tmp;
 	//ft_strdel(&padding);
 	return (s);
 }
 
+char		*move_prefix(t_args *mod)
+{
+	char	*pre;
+
+	if (mod->hash == 0 && mod->pre == -1)
+		return (NULL);
+	pre = (char*)malloc(3);
+	pre[0] = mod->pre;
+	pre[1] = '\0';
+	if (mod->hash == 2)
+		pre[1] = 'x';
+	else if (mod->hash == 3)
+		pre[1] = 'X';
+	pre[2] = '\0';
+	return (pre);
+}
+
 char		*add_prefix(char *s, t_args *mod)
 {
-	char	pre[2];
+	char	pre[3];
 	char	*tmp;
 	int		i;
 
+	if (mod->hash)
+		mod->pre = '0';
+	pre[0] = mod->pre;
+	pre[1] = '\0';
+	if (mod->hash == 2)
+		pre[1] = 'x';
+	else if (mod->hash == 3)
+		pre[1] = 'X';
+	pre[2] = '\0';
 	i = 0;
 	while (s[i])
 	{
@@ -164,8 +190,8 @@ char		*add_prefix(char *s, t_args *mod)
 			return (s);
 		i++;
 	}
-	pre[0] = mod->pre;
-	pre[1] = '\0';
+	if (mod->hash > 0)
+		mod->pre = '0';
 	tmp = ft_strjoin(pre, s);
 	//ft_strdel(&s);
 	return (tmp);

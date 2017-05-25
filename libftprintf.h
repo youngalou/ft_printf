@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/23 14:23:03 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 10:42:25 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char			*handle_flags(va_list ap, t_args *mod, char *spec);
 char			*add_padding(char *s, int len, t_args *mod);
 char			*string_prec(char *s, t_args *mod);
 char			*add_prefix(char *s, t_args *mod);
+char			*move_prefix(t_args *mod);
 char			*diuox_prec(char *s, int len, t_args *mod);
 
 /*

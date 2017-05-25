@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/23 11:41:43 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/24 16:00:10 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,21 @@ char	*uox_conv(va_list ap, t_args *mod, char *spec, char *s)
 	if (*spec == 'u' || *spec == 'U')
 		mod->base = 10;
 	else if (*spec == 'o' || *spec == 'O')
+	{
 		mod->base = 8;
+		(mod->hash) ? mod->hash = 1 : 0;
+	}
 	else if (*spec == 'x' || *spec == 'X')
+	{
 		mod->base = 16;
+		(mod->hash) ? mod->hash = 2 : 0;
+	}
 	s = ft_itoa_base(uox_len(ap, mod), mod->base);
 	if (mod->prec == 0)
 		s = "\0";
 	if (*spec == 'X' && *s != '0')
 	{
+		(mod->hash) ? mod->hash = 3 : 0;
 		i = 0;
 		while (s[i])
 		{

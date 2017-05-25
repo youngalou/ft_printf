@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/24 15:22:09 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 10:03:18 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(void)
 {
 	char	*s = "abcd";
-	ft_printf("[ft_printf = %.d %.0d]\n", 0, 0);
-	printf("[printf    = %.d %.0d]\n", 0, 0);
+	ft_printf("[ft_printf = %#08x]\n", 42);
+	printf("[printf    = %#08x]\n", 42);
 	return (0);
 }
