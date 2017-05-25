@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 11:22:44 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 15:22:58 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <stdint.h>
 # include "./libft/libft.h"
 # include <stdio.h>
 
