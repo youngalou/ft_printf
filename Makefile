@@ -6,15 +6,13 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/19 12:53:47 by lyoung            #+#    #+#              #
-#    Updated: 2017/05/22 12:05:32 by lyoung           ###   ########.fr        #
+#    Updated: 2017/05/25 15:30:46 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 CFLAGS = -Wall -Werror -Wextra
-
-LIBFT = libft/libft.a
 
 LIBFT_SRC = libft/ft_putchar.c \
 	   libft/ft_putstr.c \
@@ -102,12 +100,10 @@ $(OBJ_LIBFT): %.o: %.c
 $(NAME): $(OBJ_LIBFT) $(OBJ)
 	@ar rc $(NAME) $(OBJ_LIBFT) $(OBJ)
 	@echo "\033[32m- libftprintf.a compiled\033[0m"
-	@make clean
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(OBJ_LIBFT)
 	@echo "\033[31m- ft_printf object files removed\033[0m"
-	@make -C libft clean
 
 fclean: clean
 	@rm -rf $(NAME)
