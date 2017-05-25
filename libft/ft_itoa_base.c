@@ -6,16 +6,16 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 14:52:06 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 15:03:12 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*build_str(long long nb, int base, int digit, int neg_flag)
+char	*build_str(intmax_t nb, int base, int digit, int neg_flag)
 {
 	char		*ret;
-	long long	base_var;
+	intmax_t	base_var;
 
 	base_var = 1;
 	while (nb >= base_var)
@@ -39,9 +39,9 @@ char	*build_str(long long nb, int base, int digit, int neg_flag)
 	return (ret);
 }
 
-char	*ft_itoa_base(long long value, int base)
+char	*ft_itoa_base(intmax_t value, int base)
 {
-	long long	nb;
+	intmax_t	nb;
 	int			digit;
 	int			neg_flag;
 
