@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 10:33:17 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 13:22:10 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 14:49:26 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int					ft_atoi(char *str);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 char				*ft_itoa(intmax_t n);
-char				*ft_itoa_base(intmax_t value, int base);
+char				*ft_itoa_base(long long value, int base);
 char				*ft_uinttoa_base(uintmax_t value, int base);
 
 /*

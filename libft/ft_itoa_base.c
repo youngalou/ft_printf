@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 13:22:28 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 14:49:15 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*build_str(intmax_t nb, int base, int digit, int neg_flag)
 	return (ret);
 }
 
-char	*ft_itoa_base(intmax_t value, int base)
+char	*ft_itoa_base(long long value, int base)
 {
 	intmax_t	nb;
 	int			digit;
