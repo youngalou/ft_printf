@@ -6,15 +6,15 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 14:15:15 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 14:53:31 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_uinttoa_base(uintmax_t value, int base)
+char	*ft_uinttoa_base(unsigned long long value, int base)
 {
-	uintmax_t	nb;
+	unsigned long long	nb;
 	int			digit;
 	char		*ret;
 
