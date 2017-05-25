@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 10:55:21 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 11:43:32 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ char		*diuox_prec(char *s, int len, t_args *mod)
 	char	*tmp;
 	char	pre[2];
 
-	if (*s == '0')
-		string_prec(s, mod);
+	if (*s == '0' && mod->hash != 1)
+		s = string_prec(s, mod);
 	if (len < 1)
 		return (s);
 	pre[0] = mod->pre;
@@ -170,19 +170,10 @@ char		*move_prefix(t_args *mod)
 
 char		*add_prefix(char *s, t_args *mod)
 {
-	char	pre[3];
+	char	pre[2];
 	char	*tmp;
 	int		i;
 
-	if (mod->hash)
-		mod->pre = '0';
-	pre[0] = mod->pre;
-	pre[1] = '\0';
-	if (mod->hash == 2)
-		pre[1] = 'x';
-	else if (mod->hash == 3)
-		pre[1] = 'X';
-	pre[2] = '\0';
 	i = 0;
 	while (s[i])
 	{
@@ -190,9 +181,30 @@ char		*add_prefix(char *s, t_args *mod)
 			return (s);
 		i++;
 	}
-	if (mod->hash > 0)
-		mod->pre = '0';
+	pre[0] = mod->pre;
+	pre[1] = '\0';
 	tmp = ft_strjoin(pre, s);
 	//ft_strdel(&s);
 	return (tmp);
 }
+
+char		*add_hash(char *s, t_args *mod)
+{
+	char	pre[3];
+	char	*tmp;
+
+	if (!mod->hash || !*s || *s == '0')
+		return (s);
+	mod->pre = '0';
+	pre[0] = mod->pre;;
+	pre[1] = '\0';
+	if (mod->hash == 2)
+		pre[1] = 'x';
+	else if (mod->hash == 3)
+		pre[1] = 'X';
+	pre[2] = '\0';
+	tmp = ft_strjoin(pre, s);
+	//ft_strdel(&s);
+	return (tmp);
+}
+

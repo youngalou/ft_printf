@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/24 16:00:10 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 13:34:45 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 	else if (F_UOX)
 	{
 		s = uox_conv(ap, mod, spec, s);
-		s = add_prefix((diuox_prec(s, mod->prec - ft_strlen(s), mod)), mod);
+		s = add_hash(diuox_prec(s, mod->prec - ft_strlen(s), mod), mod);
 	}
 	else if (*spec == 'p')
 		s = pointer_conv(res, ap);
@@ -80,9 +80,7 @@ char	*uox_conv(va_list ap, t_args *mod, char *spec, char *s)
 		mod->base = 16;
 		(mod->hash) ? mod->hash = 2 : 0;
 	}
-	s = ft_itoa_base(uox_len(ap, mod), mod->base);
-	if (mod->prec == 0)
-		s = "\0";
+	s = ft_uinttoa_base(uox_len(ap, mod), mod->base);
 	if (*spec == 'X' && *s != '0')
 	{
 		(mod->hash) ? mod->hash = 3 : 0;

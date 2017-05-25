@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 10:53:12 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 10:56:32 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 14:18:16 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ intmax_t	uox_len(va_list ap, t_args *mod)
 	else if (mod->length == 2)
 		return ((unsigned short)va_arg(ap, unsigned int));
 	else if (mod->length == 3)
-		return ((long)va_arg(ap, unsigned long));
+		return (va_arg(ap, unsigned long));
 	else if (mod->length == 4)
-		return ((long long)va_arg(ap, unsigned int)); //should be unsigned long long, but can't make datatype any >
+		return (va_arg(ap, unsigned long long));
 	else if (mod->length == 5)
-		return ((size_t)va_arg(ap, size_t));
+		return (va_arg(ap, size_t));
 	else if (mod->length == 6)
-		return ((intmax_t)va_arg(ap, uintmax_t));
+		return (va_arg(ap, uintmax_t));
 	return (0);
 }
 
@@ -65,16 +65,16 @@ intmax_t	di_len(va_list ap, t_args *mod)
 	if (mod->length == 0)
 		return (va_arg(ap, int));
 	else if (mod->length == 1)
-		return ((signed char)va_arg(ap, unsigned int));
+		return ((char)va_arg(ap, unsigned int));
 	else if (mod->length == 2)
 		return ((short)va_arg(ap, unsigned int));
 	else if (mod->length == 3)
-		return ((long)va_arg(ap, long));
+		return (va_arg(ap, long));
 	else if (mod->length == 4)
-		return ((long long)va_arg(ap, long long));
+		return (va_arg(ap, long long));
 	else if (mod->length == 5)
-		return ((size_t)va_arg(ap, size_t));
+		return (va_arg(ap, size_t));
 	else if (mod->length == 6)
-		return ((intmax_t)va_arg(ap, intmax_t));
+		return (va_arg(ap, intmax_t));
 	return (0);
 }
