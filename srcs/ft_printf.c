@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 13:26:43 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 16:30:03 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*handle_args(const char *fmt, char *place, t_res *res, va_list ap)
 	if (F_MOD)
 		spec = search_mods(ap, mod, spec);
 	if (F_CONV)
-		conversions(res, ap, mod, spec);
-	return (spec + 1);
+		spec = conversions(res, ap, mod, spec);
+	return (spec);
 }
 
 int		ft_printf(const char *fmt, ...)

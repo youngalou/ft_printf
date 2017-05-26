@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/19 12:53:47 by lyoung            #+#    #+#              #
-#    Updated: 2017/05/25 15:30:46 by lyoung           ###   ########.fr        #
+#    Updated: 2017/05/25 15:38:20 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,7 @@ $(NAME): $(OBJ_LIBFT) $(OBJ)
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_LIBFT)
-	@echo "\033[31m- ft_printf object files removed\033[0m"
+	@echo "\033[31m- object files removed\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)

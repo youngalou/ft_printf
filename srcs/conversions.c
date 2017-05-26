@@ -6,13 +6,13 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 13:34:45 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/25 16:29:33 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-void	conversions(t_res *res, va_list ap, t_args *mod, char *spec)
+char	*conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 {
 	char	*s;
 
@@ -22,6 +22,7 @@ void	conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	res->len += ft_strlen(s);
 	check_res(res, ft_strlen(s));
 	ft_strcat(res->out, s);
+	return (spec + 1);
 	//ft_strdel(&s);
 }
 
