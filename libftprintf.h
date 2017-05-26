@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 16:30:34 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/26 14:14:46 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_args
 	char		pre;
 	int			base;
 	int			hash;
+	int			addr;
 }				t_args;
 
 typedef struct	s_res
@@ -87,7 +88,7 @@ char			*conversions(t_res *res, va_list ap, t_args *mod, char *spec);
 char			*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec);
 char			*uox_conv(va_list ap, t_args *mod, char *spec, char *s);
 char			*char_conv(t_res *res, va_list ap);
-char			*pointer_conv(t_res *res, va_list ap);
+char			*pointer_conv(va_list ap, t_args *mod);
 
 /*
 ** --------------- modifiers.c --------------

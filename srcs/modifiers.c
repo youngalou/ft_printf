@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/26 12:00:25 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/26 14:16:04 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		init_mods(t_args *mod)
 	mod->pre = 0;
 	mod->base = 10;
 	mod->hash = 0;
+	mod->addr = 0;
 }
 
 char		*search_mods(va_list ap, t_args *mod, char *spec)
@@ -193,7 +194,7 @@ char		*add_hash(char *s, t_args *mod)
 	char	pre[3];
 	char	*tmp;
 
-	if (!mod->hash || !*s || *s == '0')
+	if (!mod->hash || !*s || (ft_strcmp(s, "0") == 0 && mod->addr == 0))
 		return (s);
 	mod->pre = '0';
 	pre[0] = mod->pre;;

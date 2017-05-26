@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 16:29:33 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/26 14:15:48 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 		s = add_hash(diuox_prec(s, mod->prec - ft_strlen(s), mod), mod);
 	}
 	else if (*spec == 'p')
-		s = pointer_conv(res, ap);
+		s = pointer_conv(ap, mod);
 	return (s);
 }
 
@@ -107,14 +107,12 @@ char	*char_conv(t_res *res, va_list ap)
 	return (s);
 }
 
-char	*pointer_conv(t_res *res, va_list ap)
+char	*pointer_conv(va_list ap, t_args *mod)
 {
-	char	*pre;
 	char	*s;
 
-	pre = "0x\0";
-	s = ft_itoa_base(va_arg(ap, long long), 16);
-	check_res(res, ft_strlen(pre));
-	ft_strcat(res->out, pre);
+	mod->hash = 2;
+	mod->addr = 1;
+	s = add_hash(ft_itoa_base(va_arg(ap, intmax_t), 16), mod);
 	return (s);
 }
