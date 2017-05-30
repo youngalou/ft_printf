@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:49:53 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/22 13:43:32 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/30 11:42:07 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_res	*init_res(size_t cap)
 	res->cap = cap;
 	res->len = 0;
 	res->size = 0;
+	res->fmt = 0;
+	res->place = 0;
 	return (res);
 }
 

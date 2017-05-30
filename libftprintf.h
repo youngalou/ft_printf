@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/26 14:14:46 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/30 11:46:34 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # define F_LEN (*spec == 'h' || *spec == 'l' || *spec == 'L' || *spec == 'z' || *spec == 'j')
 
-# define F_FLAGS (*spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == '0' || *spec == ' ' || *spec == '#' || (*spec >= '1' && *spec <= '9'))
+# define F_FLAGS (*spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == ' ' || *spec == '#' || (*spec >= '0' && *spec <= '9'))
 
 /*
 ** hh = 1	:	unsigned char
@@ -70,15 +70,18 @@ typedef struct	s_res
 	size_t		len;
 	size_t		cap;
 	size_t		size;
+	char		*fmt;
+	char		*place;
 }				t_res;
 
 /*
 ** --------------- ft_printf.c --------------
 */
 
-int				ft_printf(const char *format, ...);
-char			*handle_args(const char *fmt, char *place, t_res *res,
-							va_list ap);
+int				ft_printf(const char *fmt, ...);
+char			*handle_args(t_res *res,
+							va_list ap, t_args *mod);
+void			replace_null(t_res *res);
 
 /*
 ** --------------- conversions.c --------------

@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/26 14:15:48 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/30 11:36:14 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	res->len += ft_strlen(s);
 	check_res(res, ft_strlen(s));
 	ft_strcat(res->out, s);
+	init_mods(mod);
 	return (spec + 1);
 	//ft_strdel(&s);
 }
@@ -101,6 +102,8 @@ char	*char_conv(t_res *res, va_list ap)
 
 	s = (char*)malloc(2);
 	s[0] = va_arg(ap, int);
+	if (s[0] == 0)
+		s[0] = 127;
 	s[1] = '\0';
 	if (!s[0])
 		res->len++;
