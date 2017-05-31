@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 13:44:17 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 15:47:05 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		main(void)
 {
-	printf("\t%d\n", ft_printf("{%010d}", 1));
-	printf("\t%d\n", printf("{%010d}", 1));
+	printf("\t%d\n", ft_printf("%"));
+	printf("\t%d\n", printf("%"));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 11:14:23 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 13:19:24 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 15:06:32 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ char	*char_conv(t_res *res, va_list ap)
 {
 	char	*s;
 
-	s = (char*)malloc(2);
+	s = ft_strnew(2);
 	s[0] = va_arg(ap, int);
 	if (s[0] == 0)
 		s[0] = 127;
-	s[1] = '\0';
 	if (!s[0])
 		res->len++;
 	return (s);

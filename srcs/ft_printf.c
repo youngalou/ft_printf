@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:55:39 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 15:48:27 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ char	*handle_args(t_res *res, va_list ap, t_args *mod)
 		spec = search_mods(ap, mod, spec);
 	if (F_CONV)
 		spec = conversions(res, ap, mod, spec);
+	else if (*spec)
+	{
+		mod->tmp = add_padding(ft_strndup(spec, 1), mod->width - 1, mod);
+		res->len += (mod->width) ? mod->width : 1;
+		ft_strcat(res->out, mod->tmp);
+		ft_strdel(&mod->tmp);
+		spec++;
+	}
 	return (spec);
 }
 
@@ -60,7 +68,6 @@ int		ft_printf(const char *fmt, ...)
 		res->fmt = handle_args(res, ap, mod);
 	if (ft_strlen(res->fmt))
 	{
-		res->fmt = add_padding(res->fmt, mod->width - 1, mod);
 		ft_strcat(res->out, res->fmt);
 		res->len += ft_strlen(res->fmt);
 	}
