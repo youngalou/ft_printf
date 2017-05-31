@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:25:07 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 14:48:19 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 # define F_FLAGS (*spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == ' ' || *spec == '#' || (*spec >= '0' && *spec <= '9'))
 
+# define POOP F_FLAGS
+
 /*
 ** hh = 1	:	unsigned char
 ** h  = 2	:	unsigned short
@@ -41,19 +43,9 @@
 ** j  = 6	:	intmax_t
 */
 
-typedef enum
-{
-	t_uchar = 1,
-	t_ushort,
-	t_long,
-	t_longlong,
-	t_sizet,
-	t_intmaxt
-}	length;
-
 typedef struct	s_args
 {
-	length		length;
+	int			length;
 	intmax_t	width;
 	int			prec;
 	int			align;
@@ -62,6 +54,7 @@ typedef struct	s_args
 	int			base;
 	int			hash;
 	int			addr;
+	char		*tmp;
 }				t_args;
 
 typedef struct	s_res
@@ -70,6 +63,7 @@ typedef struct	s_res
 	size_t		len;
 	size_t		cap;
 	size_t		size;
+	char		*start;
 	char		*fmt;
 	char		*place;
 }				t_res;
@@ -97,7 +91,7 @@ char			*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec);
 void			init_mods(t_args *mod);
 char			*search_mods(va_list ap, t_args *mod, char *spec);
 char			*handle_flags(va_list ap, t_args *mod, char *spec);
-
+char			*width_prec(va_list ap, t_args *mod, char *spec);
 
 /*
 ** --------------- handle_length.c --------------
@@ -123,7 +117,6 @@ void			free_res(t_res *res);
 char			*handle_diuox(t_res *res, va_list ap, t_args *mod, char *spec);
 char			*uox_conv(va_list ap, t_args *mod, char *spec, char *s);
 char			*diuox_prec(char *s, int len, t_args *mod);
-
 
 /*
 ** --------------- handle_scp.c --------------

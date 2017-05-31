@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:25:24 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 12:55:39 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int		ft_printf(const char *fmt, ...)
 	va_start(ap, fmt);
 	res = init_res(50);
 	mod = (t_args*)malloc(sizeof(t_args));
-	res->fmt = ft_strdup(fmt);
+	res->start = ft_strdup(fmt);
+	res->fmt = res->start;
 	while ((res->place = ft_strchr(res->fmt, '%')))
 		res->fmt = handle_args(res, ap, mod);
 	if (ft_strlen(res->fmt))

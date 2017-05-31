@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:33:28 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 12:43:31 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	check_res(res, ft_strlen(s));
 	ft_strcat(res->out, s);
 	init_mods(mod);
-	//ft_strdel(&s);
+	ft_strdel(&s);
 	return (spec + 1);
 }
 
@@ -34,7 +34,7 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 
 	s = NULL;
 	if (*spec == '%')
-		s = "%\0";
+		s = ft_strdup("%");
 	if (F_CAPS && mod->length < 3)
 		mod->length = 3;
 	if (F_UOX || *spec == 'd' || *spec == 'D' || *spec == 'i')

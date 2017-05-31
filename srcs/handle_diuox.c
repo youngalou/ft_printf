@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 10:46:06 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:18:35 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 13:29:32 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*uox_conv(va_list ap, t_args *mod, char *spec, char *s)
 	{
 		(mod->hash) ? mod->hash = 3 : 0;
 		i = -1;
-		while (s[i++])
+		while (s[++i])
 			s[i] = ft_toupper(s[i]);
 	}
 	return (s);
@@ -81,7 +81,8 @@ char	*diuox_prec(char *s, int len, t_args *mod)
 	while (--len >= 0)
 		padding[len] = '0';
 	tmp = ft_strjoin(padding, s);
-	//ft_strdel(&s);
+	(mod->pre == '-') ? s-- : 0;
+	ft_strdel(&s);
 	s = tmp;
 	if (pre[0] == '-')
 		tmp = ft_strjoin(pre, s);

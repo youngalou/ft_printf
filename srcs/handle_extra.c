@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 11:36:36 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:17:21 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 14:34:42 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@ char		*add_padding(char *s, int len, t_args *mod)
 	if (len < 1)
 		return (s);
 	pre = move_prefix(mod);
+	mod->tmp = s;
 	(mod->pre && mod->pad == '0') ? s++ : 0;
 	(mod->hash > 1 && mod->pad == '0') ? s++ : 0;
-	padding = (char*)malloc(len + 1);
-	padding[len] = '\0';
+	padding = ft_strnew(len);
 	while (--len >= 0)
 		padding[len] = mod->pad;
-	tmp = NULL;
-	if (mod->align == 0)
-		tmp = ft_strjoin(padding, s);
-	else if (mod->align == 1)
-		tmp = ft_strjoin(s, padding);
-	//ft_strdel(&s);
+	tmp = (mod->align == 0) ? ft_strjoin(padding, s) : ft_strjoin(s, padding);
 	s = tmp;
 	if (pre && mod->pad == '0')
-		tmp = ft_strjoin(pre, s);
-	s = tmp;
+	{
+		s = ft_strjoin(pre, tmp);
+		ft_strdel(&tmp);
+	}
+	ft_strdel(&mod->tmp);
 	ft_strdel(&padding);
+	ft_strdel(&pre);
 	return (s);
 }
 
@@ -74,7 +73,7 @@ char		*add_prefix(char *s, t_args *mod)
 	pre[0] = mod->pre;
 	pre[1] = '\0';
 	tmp = ft_strjoin(pre, s);
-	ft_strdel(&s); //causes random errors with 'X'
+	ft_strdel(&s);
 	return (tmp);
 }
 
@@ -93,7 +92,7 @@ char		*add_hash(char *s, t_args *mod)
 	else if (mod->hash == 3)
 		pre[1] = 'X';
 	pre[2] = '\0';
-	tmp = ft_strjoin(pre, s); //causes random errors with 'X'
+	tmp = ft_strjoin(pre, s);
 	ft_strdel(&s);
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 15:26:34 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 14:42:04 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ char	*ft_uinttoa_base(uintmax_t value, int base)
 	nb = value;
 	digit = 0;
 	if (nb == 0)
-		return ("0\0");
+		return (ft_strdup("0"));
 	while (value)
 	{
 		value = value / base;
 		digit++;
 	}
-	ret = (char*)malloc(sizeof(ret) * (digit + 1));
-	ret[digit] = '\0';
+	ret = ft_strnew(digit);
 	digit--;
 	while (nb > 0)
 	{
