@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 12:38:04 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/25 15:26:27 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 14:59:58 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_itoa_base(intmax_t value, int base)
 	digit = 0;
 	neg_flag = 0;
 	if (nb == 0)
-		return ("0\0");
+		return (ft_strdup("0"));
 	if (nb < 0)
 	{
 		nb = -nb;
