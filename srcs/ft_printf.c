@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 11:24:26 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/30 12:03:54 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 12:25:24 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		ft_printf(const char *fmt, ...)
 {
 	va_list		ap;
 	t_res		*res;
-	t_args	*mod;
+	t_args		*mod;
+	size_t		ret;
 
 	va_start(ap, fmt);
 	res = init_res(50);
@@ -65,5 +66,8 @@ int		ft_printf(const char *fmt, ...)
 	va_end(ap);
 	replace_null(res);
 	write(1, res->out, res->len);
-	return (res->len);
+	ret = res->len;
+	free_res(res);
+	free(mod);
+	return (ret);
 }

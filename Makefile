@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/19 12:53:47 by lyoung            #+#    #+#              #
-#    Updated: 2017/05/25 15:38:20 by lyoung           ###   ########.fr        #
+#    Updated: 2017/05/31 12:13:24 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,9 @@ SRC = srcs/ft_printf.c \
 	  srcs/modifiers.c \
 	  srcs/conversions.c \
 	  srcs/handle_length.c \
+	  srcs/handle_diuox.c \
+	  srcs/handle_scp.c \
+	  srcs/handle_extra.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -100,6 +103,7 @@ $(OBJ_LIBFT): %.o: %.c
 $(NAME): $(OBJ_LIBFT) $(OBJ)
 	@ar rc $(NAME) $(OBJ_LIBFT) $(OBJ)
 	@echo "\033[32m- libftprintf.a compiled\033[0m"
+	@make clean #make sure to remove
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_LIBFT)

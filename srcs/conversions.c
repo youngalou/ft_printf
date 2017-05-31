@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/30 11:36:14 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 12:33:28 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ char	*conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	char	*s;
 
 	s = handle_conv(res, ap, mod, spec);
-	res->size = ((*s == '\0' && (*spec == 'c' || *spec == 'C')) ? 1 : ft_strlen(s));
+	res->size = ((*s == '\0' && (*spec == 'c' || *spec == 'C'))
+				? 1 : ft_strlen(s));
 	s = add_padding(s, mod->width - res->size, mod);
 	res->len += ft_strlen(s);
 	check_res(res, ft_strlen(s));
 	ft_strcat(res->out, s);
 	init_mods(mod);
-	return (spec + 1);
 	//ft_strdel(&s);
+	return (spec + 1);
 }
 
 char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
@@ -32,90 +33,14 @@ char	*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec)
 	char	*s;
 
 	s = NULL;
-	if (F_CAPS && mod->length < 3)
-		mod->length = 3;
 	if (*spec == '%')
 		s = "%\0";
-	else if (*spec == 's' || *spec == 'S')
-	{
-		s = va_arg(ap, char*);
-		if (!s)
-			s = "(null)";
-		s = string_prec(s, mod);
-	}
-	else if (*spec == 'd' || *spec == 'D' || *spec == 'i')
-	{
-		s = ft_itoa(di_len(ap, mod));
-		res->size = ft_strlen(s);
-		if (*s == '-')
-		{
-			mod->pre = '-';
-			res->size--;
-		}
-		s = add_prefix((diuox_prec(s, mod->prec - res->size, mod)), mod);
-	}
-	else if (*spec == 'c' || *spec == 'C')
-		s = char_conv(res, ap);
-	else if (F_UOX)
-	{
-		s = uox_conv(ap, mod, spec, s);
-		s = add_hash(diuox_prec(s, mod->prec - ft_strlen(s), mod), mod);
-	}
-	else if (*spec == 'p')
-		s = pointer_conv(ap, mod);
-	return (s);
-}
-
-char	*uox_conv(va_list ap, t_args *mod, char *spec, char *s)
-{
-	int		i;
-
-	if (*spec == 'u' || *spec == 'U')
-		mod->base = 10;
-	else if (*spec == 'o' || *spec == 'O')
-	{
-		mod->base = 8;
-		(mod->hash) ? mod->hash = 1 : 0;
-	}
-	else if (*spec == 'x' || *spec == 'X')
-	{
-		mod->base = 16;
-		(mod->hash) ? mod->hash = 2 : 0;
-	}
-	s = ft_uinttoa_base(uox_len(ap, mod), mod->base);
-	if (*spec == 'X' && *s != '0')
-	{
-		(mod->hash) ? mod->hash = 3 : 0;
-		i = 0;
-		while (s[i])
-		{
-			s[i] = ft_toupper(s[i]);
-			i++;
-		}
-	}
-	return (s);
-}
-
-char	*char_conv(t_res *res, va_list ap)
-{
-	char	*s;
-
-	s = (char*)malloc(2);
-	s[0] = va_arg(ap, int);
-	if (s[0] == 0)
-		s[0] = 127;
-	s[1] = '\0';
-	if (!s[0])
-		res->len++;
-	return (s);
-}
-
-char	*pointer_conv(va_list ap, t_args *mod)
-{
-	char	*s;
-
-	mod->hash = 2;
-	mod->addr = 1;
-	s = add_hash(ft_itoa_base(va_arg(ap, intmax_t), 16), mod);
+	if (F_CAPS && mod->length < 3)
+		mod->length = 3;
+	if (F_UOX || *spec == 'd' || *spec == 'D' || *spec == 'i')
+		s = handle_diuox(res, ap, mod, spec);
+	else if (*spec == 's' || *spec == 'S' || *spec == 'c'
+			|| *spec == 'C' || *spec == 'p')
+		s = handle_scp(res, ap, mod, spec);
 	return (s);
 }

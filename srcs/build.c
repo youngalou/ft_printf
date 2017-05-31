@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:49:53 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/30 11:42:07 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 12:26:47 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ void	check_res(t_res *res, size_t size)
 {
 	if (size + res->len > res->cap)
 		resize_res(res, size);
+}
+
+void	free_res(t_res *res)
+{
+	ft_strdel(&res->out);
+	//ft_strdel(&res->fmt);
+	//ft_strdel(&res->place);
+	free(res);
 }
