@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 10:46:06 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:39:26 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 12:28:39 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*handle_diuox(t_res *res, va_list ap, t_args *mod, char *spec)
 	char	*s;
 
 	s = NULL;
-	if (*spec == 'd' || *spec == 'D' || *spec == 'i')
+	if (F_DI)
 	{
 		s = ft_itoa(di_len(ap, mod));
 		res->size = ft_strlen(s);
@@ -28,7 +28,7 @@ char	*handle_diuox(t_res *res, va_list ap, t_args *mod, char *spec)
 		}
 		s = add_prefix((diuox_prec(s, mod->prec - res->size, mod)), mod);
 	}
-	else if (F_UOX)
+	else if (F_UOX || F_CAPS)
 	{
 		s = uox_conv(ap, mod, spec, s);
 		s = add_hash(diuox_prec(s, mod->prec - ft_strlen(s), mod), mod);

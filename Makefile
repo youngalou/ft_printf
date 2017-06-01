@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/19 12:53:47 by lyoung            #+#    #+#              #
-#    Updated: 2017/05/31 12:35:33 by lyoung           ###   ########.fr        #
+#    Updated: 2017/06/01 13:13:31 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,6 @@ OBJ = $(SRC:.c=.o)
 
 OBJ_LIBFT = $(LIBFT_SRC:.c=.o)
 
-.PHONY = all clean fclean clean re
-
 all: $(NAME)
 
 $(OBJ): %.o: %.c
@@ -103,7 +101,6 @@ $(OBJ_LIBFT): %.o: %.c
 $(NAME): $(OBJ_LIBFT) $(OBJ)
 	@ar rc $(NAME) $(OBJ_LIBFT) $(OBJ)
 	@echo "\033[32m- libftprintf.a compiled\033[0m"
-	@make clean #make sure to remove
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_LIBFT)
@@ -112,9 +109,5 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@echo "\033[31m- libftprintf.a removed\033[0m"
-	@rm -rf a.out
 
 re: fclean all
-
-main: all clean
-	@gcc $(CFLAGS) main.c $(NAME) $(LIBFT)

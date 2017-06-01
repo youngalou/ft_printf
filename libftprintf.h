@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:25:27 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 13:08:34 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@
 # include <limits.h>
 # include <stdint.h>
 # include "./libft/libft.h"
-# include <stdio.h>
 
-# define F_CONV (*spec == 's' || *spec == 'S' || *spec == 'd' || *spec == 'D' || *spec == 'i' || *spec == 'c' || *spec == 'C' || *spec == 'u' || *spec == 'U' || *spec == 'o' || *spec == 'O' || *spec == 'x' || *spec == 'X' || *spec == 'p' || *spec == '%')
+# define F_SCP (*spec == 's' || *spec == 'c' || *spec == 'C' || *spec == 'p')
+# define F_DI (*spec == 'd' || *spec == 'D' || *spec == 'i')
+# define F_UOX (*spec == 'u' || *spec == 'o' || *spec == 'x' || *spec == 'X')
+# define F_CAPS (*spec == 'D' || *spec == 'U' || *spec == 'O')
+# define F_CONV (F_SCP || F_DI || F_UOX || F_CAPS || *spec == '%')
 
-# define F_UOX (*spec == 'u' || *spec == 'U' || *spec == 'o' || *spec == 'O' || *spec == 'x' || *spec == 'X')
+# define F_HL (*spec == 'h' || *spec == 'l' || *spec == 'L')
+# define F_ZJ (*spec == 'z' || *spec == 'j')
+# define F_LEN (F_HL || F_ZJ)
 
-# define F_CAPS (*spec == 'S' || *spec == 'D' || *spec == 'C' || *spec == 'U' || *spec == 'O')
+# define F_WP (*spec == '.' || *spec == '*' || (*spec >= '0' && *spec <= '9'))
+# define F_PRE (*spec == '-' || *spec == '+' || *spec == ' ' || *spec == '#')
+# define F_FLAGS (F_WP || F_PRE)
 
-# define F_MOD (*spec == 'h' || *spec == 'l' || *spec == 'L' || *spec == 'z' || *spec == 'j' || *spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == '0' || *spec == ' ' || *spec == '#' || (*spec >= '1' && *spec <= '9'))
-
-# define F_LEN (*spec == 'h' || *spec == 'l' || *spec == 'L' || *spec == 'z' || *spec == 'j')
-
-# define F_FLAGS (*spec == '.' || *spec == '*' || *spec == '-' || *spec == '+' || *spec == ' ' || *spec == '#' || (*spec >= '0' && *spec <= '9'))
-
-# define POOP F_FLAGS
+# define F_MOD (F_LEN || F_FLAGS)
 
 /*
 ** hh = 1	:	unsigned char

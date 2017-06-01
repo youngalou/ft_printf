@@ -6,13 +6,11 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 11:14:23 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:40:27 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 12:59:55 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
-
-void	wcs_conv(va_list ap);
 
 char	*handle_scp(t_res *res, va_list ap, t_args *mod, char *spec)
 {
@@ -73,11 +71,3 @@ char	*string_prec(char *s, t_args *mod)
 	ft_strdel(&s);
 	return (tmp);
 }
-
-/*void	wcs_conv(va_list ap)
-{
-	wchar_t	*s;
-
-	s = va_arg(ap, wchar_t*);
-	write(1, s, 8);
-}*/

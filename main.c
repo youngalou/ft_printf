@@ -6,15 +6,16 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:41:44 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:38:30 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 13:01:31 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 int		main(void)
 {
-	printf("\t%d\n", ft_printf("{%03.2d}", 0));
-	printf("\t%d\n", printf("{%03.2d}", 0));
+	printf("\t%d\n", ft_printf("{%C}", 0));
+	printf("\t%d\n", printf("{%C}", 0));
 	return (0);
 }
