@@ -6,16 +6,17 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 14:39:55 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 14:39:57 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/05/31 15:54:16 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 #include <locale.h>
 
 int		main(void)
 {
 	setlocale(LC_ALL, "");
+	ft_printf("%S\n", L"今日は木曜日です");
 	printf("%S\n", L"今日は木曜日です");
 	return (0);
 }

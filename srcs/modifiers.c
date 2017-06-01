@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 14:33:02 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 11:08:06 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char		*width_prec(va_list ap, t_args *mod, char *spec)
 			while (*(spec + 1) >= '0' && *(spec + 1) <= '9')
 				spec++;
 		}
-		mod->pad = ' ';
 	}
 	return (spec);
 }

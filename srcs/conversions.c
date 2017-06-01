@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 13:03:19 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 12:43:31 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 11:02:17 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*conversions(t_res *res, va_list ap, t_args *mod, char *spec)
 	char	*s;
 
 	s = handle_conv(res, ap, mod, spec);
+	if (!s)
+		return (spec + 1);
 	res->size = ((*s == '\0' && (*spec == 'c' || *spec == 'C'))
 				? 1 : ft_strlen(s));
 	s = add_padding(s, mod->width - res->size, mod);

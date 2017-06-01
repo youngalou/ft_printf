@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/05/31 14:48:19 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/01 11:25:27 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char			*diuox_prec(char *s, int len, t_args *mod);
 */
 
 char			*handle_scp(t_res *res, va_list ap, t_args *mod, char *spec);
-char			*char_conv(t_res *res, va_list ap);
+char			*char_conv(t_res *res, va_list ap, t_args *mod);
 char			*pointer_conv(va_list ap, t_args *mod);
 char			*string_prec(char *s, t_args *mod);
 
