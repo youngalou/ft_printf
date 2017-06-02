@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 13:08:34 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/02 12:25:10 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,38 @@ typedef struct	s_res
 ** --------------- ft_printf.c --------------
 */
 
+int				ft_asprintf(char **ret, const char *fmt, ...);
+int				ft_snprintf(char *ret, size_t size, const char *fmt, ...);
+int				ft_sprintf(char *ret, const char *fmt, ...);
+int				ft_dprintf(int fd, const char *fmt, ...);
 int				ft_printf(const char *fmt, ...);
-char			*handle_args(t_res *res,
-							va_list ap, t_args *mod);
-void			replace_null(t_res *res);
+
+/*
+** --------------- ft_vprintf.c --------------
+*/
+
+int				ft_vasprintf(char **ret, const char *fmt, va_list ap);
+int				ft_vsprintf(char *ret, const char *fmt, va_list ap);
+int				ft_vdprintf(int fd, const char *fmt, va_list ap);
+int				ft_vprintf(const char *fmt, va_list ap);
+
+/*
+** --------------- build.c --------------
+*/
+
+t_res			*init_res(size_t cap);
+int				resize_res(t_res *res, size_t size);
+void			check_res(t_res *res, size_t size);
+void			free_res(t_res *res);
 
 /*
 ** --------------- conversions.c --------------
 */
 
+char			*handle_args(t_res *res, va_list ap, t_args *mod);
 char			*conversions(t_res *res, va_list ap, t_args *mod, char *spec);
 char			*handle_conv(t_res *res, va_list ap, t_args *mod, char *spec);
+void			replace_null(t_res *res);
 
 /*
 ** --------------- modifiers.c --------------
@@ -101,15 +122,6 @@ char			*width_prec(va_list ap, t_args *mod, char *spec);
 char			*handle_length(t_args *mod, char *spec);
 intmax_t		uox_len(va_list ap, t_args *mod);
 intmax_t		di_len(va_list ap, t_args *mod);
-
-/*
-** --------------- build.c --------------
-*/
-
-t_res			*init_res(size_t cap);
-int				resize_res(t_res *res, size_t size);
-void			check_res(t_res *res, size_t size);
-void			free_res(t_res *res);
 
 /*
 ** --------------- handle_diuox.c --------------

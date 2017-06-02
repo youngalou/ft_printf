@@ -6,7 +6,7 @@
 #    By: lyoung <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/19 12:53:47 by lyoung            #+#    #+#              #
-#    Updated: 2017/06/01 13:13:31 by lyoung           ###   ########.fr        #
+#    Updated: 2017/06/02 12:25:59 by lyoung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ LIBFT_SRC = libft/ft_putchar.c \
 	   libft/ft_lstmap.c \
 
 SRC = srcs/ft_printf.c \
+	  srcs/ft_vprintf.c \
 	  srcs/build.c \
 	  srcs/modifiers.c \
 	  srcs/conversions.c \

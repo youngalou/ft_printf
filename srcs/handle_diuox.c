@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 10:46:06 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 12:28:39 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/02 10:27:42 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*diuox_prec(char *s, int len, t_args *mod)
 	char	*tmp;
 	char	pre[2];
 
+	(mod->hash == 1) ? len-- : 0;
 	if (*s == '0' && mod->hash != 1)
 		s = string_prec(s, mod);
 	if (len < 1)

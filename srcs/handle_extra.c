@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 11:36:36 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:22:58 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/02 10:10:28 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*add_padding(char *s, int len, t_args *mod)
 
 	if (len < 1)
 		return (s);
-	(mod->prec >= 0) ? mod->pad = ' ' : 0;
+	(mod->prec >= 0 && mod->length >= 0) ? mod->pad = ' ' : 0;
 	pre = move_prefix(mod);
 	mod->tmp = s;
 	(mod->pre && mod->pad == '0') ? s++ : 0;
