@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 13:44:15 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/02 12:25:10 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/02 13:27:23 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define F_WP (*spec == '.' || *spec == '*' || (*spec >= '0' && *spec <= '9'))
 # define F_PRE (*spec == '-' || *spec == '+' || *spec == ' ' || *spec == '#')
-# define F_FLAGS (F_WP || F_PRE)
+# define F_FLAGS (F_WP || F_PRE || *spec == '{')
 
 # define F_MOD (F_LEN || F_FLAGS)
 
@@ -111,9 +111,10 @@ void			replace_null(t_res *res);
 */
 
 void			init_mods(t_args *mod);
-char			*search_mods(va_list ap, t_args *mod, char *spec);
-char			*handle_flags(va_list ap, t_args *mod, char *spec);
+char			*search_mods(t_res *res, va_list ap, t_args *mod, char *spec);
+char			*handle_flags(t_res *res, va_list ap, t_args *mod, char *spec);
 char			*width_prec(va_list ap, t_args *mod, char *spec);
+char			*colors(t_res *res, char *spec);
 
 /*
 ** --------------- handle_length.c --------------

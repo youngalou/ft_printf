@@ -6,7 +6,7 @@
 /*   By: lyoung <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/04 11:35:29 by lyoung            #+#    #+#             */
-/*   Updated: 2017/06/01 11:08:06 by lyoung           ###   ########.fr       */
+/*   Updated: 2017/06/02 13:42:01 by lyoung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ void		init_mods(t_args *mod)
 	mod->tmp = 0;
 }
 
-char		*search_mods(va_list ap, t_args *mod, char *spec)
+char		*search_mods(t_res *res, va_list ap, t_args *mod, char *spec)
 {
 	while (F_MOD)
 	{
 		while (F_LEN)
 			spec = handle_length(mod, spec);
-		while (F_FLAGS)
-			spec = handle_flags(ap, mod, spec);
+		while (F_FLAGS || *spec == '{')
+			spec = handle_flags(res, ap, mod, spec);
 	}
 	return (spec);
 }
 
-char		*handle_flags(va_list ap, t_args *mod, char *spec)
+char		*handle_flags(t_res *res, va_list ap, t_args *mod, char *spec)
 {
 	if (*spec == '*' || *spec == '.')
 		spec = width_prec(ap, mod, spec);
@@ -59,6 +59,8 @@ char		*handle_flags(va_list ap, t_args *mod, char *spec)
 		while (*(spec + 1) >= '0' && *(spec + 1) <= '9')
 			spec++;
 	}
+	else if (*spec == '{')
+		spec = colors(res, spec);
 	return (spec + 1);
 }
 
@@ -88,4 +90,63 @@ char		*width_prec(va_list ap, t_args *mod, char *spec)
 		}
 	}
 	return (spec);
+}
+
+char	g_colors[34][2][15] = {
+	{"{red}", "\033[31m"},
+	{"{bred}", "\033[31;1m"},
+	{"{green}", "\033[32m"},
+	{"{bgreen}", "\033[32;1m"},
+	{"{yellow}", "\033[33m"},
+	{"{byellow}", "\033[33;1m"},
+	{"{blue}", "\033[34m"},
+	{"{bblue}", "\033[34;1m"},
+	{"{purple}", "\033[35m"},
+	{"{bpurple}", "\033[35;1m"},
+	{"{cyan}", "\033[36m"},
+	{"{bcyan}", "\033[36;1m"},
+	{"{black}", "\033[30m"},
+	{"{bblack}", "\033[30;1m"},
+	{"{white}", "\033[37m"},
+	{"{bwhite}", "\033[37;1m"},
+	{"{b_red}", "\033[41m"},
+	{"{b_bred}", "\033[41;1m"},
+	{"{b_green}", "\033[42m"},
+	{"{b_bgreen}", "\033[42;1m"},
+	{"{b_yellow}", "\033[43m"},
+	{"{b_byellow}", "\033[43;1m"},
+	{"{b_blue}", "\033[44m"},
+	{"{b_bblue}", "\033[44;1m"},
+	{"{b_purple}", "\033[45m"},
+	{"{b_bpurple}", "\033[45;1m"},
+	{"{b_cyan}", "\033[46m"},
+	{"{b_bcyan}", "\033[46;1m"},
+	{"{b_black}", "\033[40m"},
+	{"{b_bblack}", "\033[40;1m"},
+	{"{b_white}", "\033[47m"},
+	{"{b_bwhite}", "\033[47;1m"},
+	{"{eoc}", "\033[0m"},
+	{"{noc}", "\033[0m"}};
+
+char		*colors(t_res *res, char *spec)
+{
+	int		i;
+	int		len0;
+	int		len1;
+
+	i = 0;
+	while (i < 34)
+	{
+		len0 = ft_strlen(g_colors[i][0]);
+		if (ft_strncmp(spec, g_colors[i][0], len0) == 0)
+		{
+			len1 = ft_strlen(g_colors[i][1]);
+			check_res(res, len1);
+			ft_strcat(res->out, g_colors[i][1]);
+			res->len += len1;
+			return (spec + len0 - 1);
+		}
+		i++;
+	}
+	return (spec + 1);
 }
